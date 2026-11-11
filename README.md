@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/logo.svg" alt="salesforce-whatsapp-chat-viewer-lwc Logo" width="160" />
+</p>
+
 # Salesforce WhatsApp Chat Viewer (LWC)
 
 > Experience Cloud LWR component that imports, parses, and interactively renders WhatsApp chat exports inside Salesforce Lightning.

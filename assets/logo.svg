@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1726"/>
+      <stop offset="100%" stop-color="#0f2638"/>
+    </linearGradient>
+    <linearGradient id="sfdcBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A1E0"/>
+      <stop offset="100%" stop-color="#0070D2"/>
+    </linearGradient>
+    <linearGradient id="waGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#25D366"/>
+      <stop offset="100%" stop-color="#128C7E"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="500" height="500" rx="100" fill="url(#bg)"/>
+  <rect x="25" y="25" width="450" height="450" rx="85" fill="none" stroke="#163852" stroke-width="3"/>
+  <!-- Salesforce Cloud Silhouette (Backdrop) -->
+  <path d="M 180 270 A 55 55 0 0 1 230 180 A 70 70 0 0 1 340 185 A 60 60 0 0 1 380 270 A 50 50 0 0 1 350 330 L 170 330 A 45 45 0 0 1 180 270 Z" fill="url(#sfdcBlue)" opacity="0.85" filter="url(#glow)"/>
+  <!-- WhatsApp Chat Bubble (Foreground) -->
+  <path d="M 160 210 C 160 160, 310 160, 310 210 C 310 260, 245 265, 235 285 C 230 295, 225 295, 220 285 C 210 265, 160 260, 160 210 Z" fill="url(#waGreen)" filter="url(#glow)"/>
+  <!-- Chat message lines inside bubble -->
+  <line x1="195" y1="195" x2="275" y2="195" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+  <line x1="195" y1="215" x2="250" y2="215" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+</svg>

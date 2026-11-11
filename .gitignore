@@ -4,3 +4,7 @@
 !sfdx-project.json
 !README.md
 !.gitignore
+
+!assets/logo.svg
+!assets/
+!assets/**
