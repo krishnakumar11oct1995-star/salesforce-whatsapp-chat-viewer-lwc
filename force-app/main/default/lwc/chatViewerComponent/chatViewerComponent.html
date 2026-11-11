@@ -1,0 +1,121 @@
+<template>
+  <div class="chat-viewer-container">
+    <!-- Header -->
+    <div class="viewer-header">
+      <h1 class="viewer-title">
+        <lightning-icon icon-name="standard-file" size="medium"></lightning-icon>
+        Chat Viewer
+      </h1>
+      <p class="viewer-subtitle">Paste Google Drive link or upload a WhatsApp chat ZIP</p>
+    </div>
+
+    <!-- Input Section -->
+    <div class="input-section">
+      <div class="input-row">
+        <div class="input-group">
+          <label for="drive-link">Google Drive Link</label>
+          <div class="input-wrapper">
+            <input
+              id="drive-link"
+              type="text"
+              class="input-field"
+              placeholder="https://drive.google.com/file/d/FILE_ID/view"
+              value={driveLink}
+              onchange={handleDriveLinkChange}
+              disabled={isLoading}
+            />
+            <button
+              class="btn btn-primary"
+              onclick={handleFetchFromDrive}
+              disabled={disableLoadButton}
+            >
+              <template if:false={isLoading}>
+                <lightning-icon icon-name="utility-download" size="x-small"></lightning-icon>
+                Load from Drive
+              </template>
+              <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+              </template>
+            </button>
+          </div>
+        </div>
+
+        <div class="divider-or">
+          <span>or</span>
+        </div>
+
+        <div class="input-group">
+          <label for="file-upload">Upload ZIP File</label>
+          <input
+            id="file-upload"
+            type="file"
+            class="file-input"
+            accept=".zip"
+            onchange={handleFileUpload}
+            disabled={isLoading}
+          />
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <template if:true={error}>
+        <div class="error-box">
+          <lightning-icon icon-name="utility-error" size="small"></lightning-icon>
+          <div class="error-text">{error}</div>
+          <button class="btn-close" onclick={clearError}>×</button>
+        </div>
+      </template>
+    </div>
+
+    <!-- Chat Display Section -->
+    <template if:true={showChat}>
+      <div class="chat-section">
+        <div class="chat-header">
+          <div class="chat-info">
+            <h2>{fileName}</h2>
+            <p class="chat-stats">
+              <span>{messageCount} messages</span>
+              <span class="separator">•</span>
+              <span>{dateRange}</span>
+            </p>
+          </div>
+          <button class="btn-secondary" onclick={resetChat}>
+            <lightning-icon icon-name="utility-refresh" size="small"></lightning-icon>
+            New Chat
+          </button>
+        </div>
+
+        <div class="chat-messages">
+          <template for:each={messages} for:item="msg" for:index="index">
+            <div key={msg.id} class={msg.cssClass}>
+              <div class="message-sender">{msg.sender}</div>
+              <div class="message-timestamp">{msg.formattedTime}</div>
+              <div class="message-text">{msg.message}</div>
+              <template if:true={msg.mediaPath}>
+                <div class="message-media">
+                  <lightning-icon icon-name="standard-file" size="small"></lightning-icon>
+                  {msg.mediaPath}
+                </div>
+              </template>
+            </div>
+          </template>
+        </div>
+
+        <div class="chat-footer">
+          <p>End of chat</p>
+        </div>
+      </div>
+    </template>
+
+    <!-- Empty State -->
+    <template if:false={showChat}>
+      <template if:false={isLoading}>
+        <div class="empty-state">
+          <lightning-icon icon-name="standard-empty" size="large"></lightning-icon>
+          <h3>No chat loaded</h3>
+          <p>Share a Google Drive link or upload a WhatsApp chat ZIP to get started</p>
+        </div>
+      </template>
+    </template>
+  </div>
+</template>

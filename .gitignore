@@ -1,0 +1,6 @@
+*
+!force-app/
+!force-app/**
+!sfdx-project.json
+!README.md
+!.gitignore
